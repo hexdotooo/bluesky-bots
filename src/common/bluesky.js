@@ -1,7 +1,7 @@
 import { BskyAgent } from '@atproto/api'
 import { env } from 'node:process'
 
-import { logDemo, logPost, errorQuit, timestamp } from './utils.js'
+import { logPost, errorQuit, timestamp } from './utils.js'
 
 let sessions = {}
 
@@ -15,23 +15,19 @@ function makeAgent (bot) {
 }
 
 async function login ({ agent, bot }) {
-	const botName = bot.toLowerCase()
+	const passwordField = `${bot}_password`
 
-	const usernameField = `${botName}_username`
-	const passwordField = `${botName}_password`
-
-	if (!env[usernameField]) errorQuit(`Can't log in, ${botName} username not set in .env`)
-	if (!env[passwordField]) errorQuit(`Can't log in, ${botName} password not set in .env`)
+	if (!env[passwordField]) errorQuit(`Can't log in, ${bot} password not set in .env`)
 
 	await agent.login({
-		identifier: env[usernameField],
+		identifier: `${bot}.bsky.social`,
 		password:   env[passwordField]
 	})
 }
 
-export async function post ({ bot, mode, text }) {
-	if (mode === 'demo') {
-		logDemo({ bot, text })
+export async function post ({ bot, demo, text }) {
+	if (demo) {
+		logPost({ bot, demo, text })
 		return
 	}
 
@@ -57,5 +53,5 @@ export async function post ({ bot, mode, text }) {
 		errorQuit(`Couldn't post to ${bot}! Error was: ${error.message}`)
 	}
 
-	logPost(bot, text)
+	logPost({ bot, text })
 }

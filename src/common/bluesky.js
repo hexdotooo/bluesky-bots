@@ -5,23 +5,14 @@ import { logPost, errorQuit, timestamp } from './utils.js'
 
 let sessions = {}
 
-function makeAgent (bot) {
-	return new BskyAgent({
-		service: 'https://bsky.social',
-		persistSession: (_, sessionData) => {
-			sessions[bot] = sessionData
-		}
-	})
-}
-
 async function login ({ agent, bot }) {
-	const passwordField = `${bot}_password`
+	const password = env[`password_${bot}`]
 
-	if (!env[passwordField]) errorQuit(`Can't log in, ${bot} password not set in .env`)
+	if (!password) errorQuit(`Can't log in! password_${bot} not set in .env`)
 
 	await agent.login({
 		identifier: `${bot}.bsky.social`,
-		password:   env[passwordField]
+		password:   password
 	})
 }
 
@@ -31,7 +22,12 @@ export async function post ({ bot, demo, text }) {
 		return
 	}
 
-	const agent = makeAgent(bot)
+	const agent = new BskyAgent({
+		service: 'https://bsky.social',
+		persistSession: (_, sessionData) => {
+			sessions[bot] = sessionData
+		}
+	})
 
 	if (!sessions[bot]) {
 		try {

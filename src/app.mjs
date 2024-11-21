@@ -24,10 +24,22 @@ const bots = {
 	}
 }
 
+// TODO: --help
+
 const demo = argv.live === undefined
 
-for (let bot in bots) {
-	if (bots[bot].type === 'recital') {
+let botsList = Object.keys(bots)
+
+if (argv.bot) {
+	const requestedBot = argv.bot
+
+	if (!botsList.includes(requestedBot)) errorQuit(`Unknown bot requested, valid options are: ${botsList.sort().join(', ')}`)
+
+	botsList = [ requestedBot ]
+}
+
+for (let bot of botsList) {
+	if (bots[bot]?.type === 'recital') {
 		recitalBotFirstRun()
 	}
 

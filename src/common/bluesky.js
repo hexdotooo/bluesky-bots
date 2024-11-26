@@ -16,12 +16,7 @@ async function login ({ agent, bot }) {
 	})
 }
 
-export async function post ({ botName, demo, text }) {
-	if (demo) {
-		logPost({ botName, demo, text })
-		return
-	}
-
+export async function post ({ botName, text }) {
 	const agent = new BskyAgent({
 		service: 'https://bsky.social',
 		persistSession: (_, sessionData) => {
@@ -46,8 +41,8 @@ export async function post ({ botName, demo, text }) {
 	try {
 		await agent.post({ text })
 	} catch(error) {
-		errorQuit(`Couldn't post to ${bot}! Error was: ${error.message}`)
+		errorQuit(`Couldn't post to ${botName}! Error was: ${error.message}`)
 	}
 
-	logPost({ bot, text })
+	logPost({ botName, text })
 }

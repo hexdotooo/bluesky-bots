@@ -6,13 +6,13 @@ import { Temporal } from 'temporal-polyfill'
 
 const padBotName = botName => botName.padEnd(15, ' ')
 
-export function logPost ({ botName, demo, text }) {
-	let logEntry = demo
+export function logPost ({ botName, demoMode, text }) {
+	let logEntry = demoMode
 		? chalk.red('[Demo: ')
 		: chalk.hex('#FFCC33')('[')
 	logEntry += chalk.hex('#FF9900').bold(padBotName(botName))
 	logEntry += ' ' + timestamp()
-	logEntry += demo
+	logEntry += demoMode
 		? chalk.red('] ')
 		: chalk.hex('#FFCC33')('] ')
 	logEntry += text
@@ -27,6 +27,7 @@ export function errorQuit (message) {
 
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
+// TODO: Configurable locale and time zone
 export const timestamp = () => Temporal.Now.instant().toLocaleString(
 	'en-GB',
 	{

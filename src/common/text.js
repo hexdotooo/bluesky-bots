@@ -11,7 +11,9 @@ export function randomWord (list, options) {
 
 // Recite an array of items sequentially, maintaining position across
 // process runs
-export function recite ({ botName, mode, items }) {
+export function recite ({ botName, demoMode, items }) {
+	const mode = demoMode ? 'demo' : 'live'
+
 	const state = getBotState(botName)
 	let currentItem = state.item[mode]
 

@@ -7,10 +7,9 @@ import howlBot from './bots/howl-bot/index.js'
 import { post } from './common/bluesky.js'
 import { errorQuit, getMinutesUntilPostingTime, logPost } from './common/utils.js'
 
-import { ONE_HOUR, ONE_SECOND } from './common/constants.js'
+import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 
 // TODO: Build this from a config file
-// TODO: Interval
 // TODO: Posting minute
 const bots = {
 	'dance-bands-bot': {
@@ -21,7 +20,8 @@ const bots = {
 	},
 	'howl-bot': {
 		generator: howlBot,
-		stateful: true
+		stateful: true,
+		interval: 3
 	}
 }
 
@@ -35,8 +35,15 @@ const options = minimist(process.argv.slice(2), {
 })
 
 // TODO: --help
-const { bot: singleBotName, demo: demoMode, once: runOnce } = options
-let { count: runCount } = options
+const {
+	bot: singleBotName,
+	demo: demoMode,
+	once: runOnce
+} = options
+
+let {
+	count: runCount
+} = options
 
 // Option error checking. Typeof checks are because minimist-lite will combine
 // values given to both forms of an aliased option into an array
@@ -64,13 +71,22 @@ if (runOnce) runCount = 1
 const botRuns = {}
 
 for (let botName of botNames) {
-	let firstPostDelay = 0
+	let firstPostDelay = ONE_MINUTE * getMinutesUntilPostingTime(botName)
 	let postingInterval = ONE_HOUR
 
-	if (demoMode)
+	const { interval: intervalHours } = bots[botName]
+
+	if (intervalHours) {
+		if (intervalHours % 1 !== 0)
+			errorQuit(`Interval for ${botName} is not a round number`)
+
+		postingInterval = ONE_HOUR * intervalHours
+	}
+
+	if (demoMode) {
+		firstPostDelay = 0
 		postingInterval = ONE_SECOND * 2
-	else
-		firstPostDelay = getMinutesUntilPostingTime(botName) * 60 * 1000
+	}
 
 	setTimeout(startRun, firstPostDelay, botName, postingInterval)
 }
@@ -86,10 +102,16 @@ function doPost (botName) {
 	if (runCount && botRuns[botName] === runCount)
 		process.exit(0)
 
-	const text = bots[botName].generator({ demoMode })
+	const { generator, interval = 1 } = bots[botName]
+	const text = generator({ demoMode })
 
 	if (demoMode) {
-		logPost({ botName, demoMode, text })
+		logPost({
+			botName,
+			interval,
+			demoMode,
+			text
+		})
 	} else {
 		post({
 			botName,

@@ -1,7 +1,7 @@
 import { BskyAgent } from '@atproto/api'
 import { env } from 'node:process'
 
-import { logPost, errorQuit, timestamp } from './utils.js'
+import { logPost, errorQuit } from './utils.js'
 
 let sessions = {}
 

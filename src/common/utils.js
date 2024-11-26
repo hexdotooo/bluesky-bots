@@ -2,15 +2,17 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import chalk from 'chalk'
-import { Temporal } from 'temporal-polyfill'
+
+import { getCurrentMinute, timestamp } from './time.js'
 
 const padBotName = botName => botName.padEnd(15, ' ')
 
-export function logPost ({ botName, demoMode, text }) {
+export function logPost ({ botName, interval, demoMode, text }) {
 	let logEntry = demoMode
 		? chalk.red('[Demo: ')
 		: chalk.hex('#FFCC33')('[')
 	logEntry += chalk.hex('#FF9900').bold(padBotName(botName))
+	logEntry += ` (${interval.toString().padStart(2, '0')}h)`
 	logEntry += ' ' + timestamp()
 	logEntry += demoMode
 		? chalk.red('] ')
@@ -24,25 +26,6 @@ export function errorQuit (message) {
 	console.error(`${chalk.red('[Error]')} ${message}`)
 	process.exit(0)
 }
-
-export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-// TODO: Configurable locale and time zone
-export const timestamp = () => Temporal.Now.instant().toLocaleString(
-	'en-GB',
-	{
-		timeZone: 'UTC',
-		timeZoneName: 'short',
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit'
-	}
-)
-
-export const getCurrentMinute = () => Temporal.Now.instant().toLocaleString('en-GB', { minute: 'numeric' })
 
 const getBotStatePath = botName => `./src/bots/${botName}/state.json`
 

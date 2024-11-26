@@ -1,16 +1,19 @@
 import minimist from 'minimist-lite'
 
-import danceBandsBot from './bots/dance-bands-bot/index.js' // TODO: fix path
+import danceBandsBot from './bots/dance-bands-bot/index.js'
 import everyTmnt from './bots/every-tmnt/index.js'
 import howlBot from './bots/howl-bot/index.js'
 
 import { post } from './common/bluesky.js'
-import { errorQuit, getCurrentMinute, timestamp } from './common/utils.js'
+import { errorQuit, getMinutesUntilPostingTime } from './common/utils.js'
 
 import { ONE_HOUR, ONE_SECOND } from './common/constants.js'
 
 const argv = minimist(process.argv.slice(2))
 
+// TODO: Build this from a config file
+// TODO: Interval
+// TODO: Posting minute
 const bots = {
 	'dance-bands-bot': {
 		generator: danceBandsBot
@@ -20,48 +23,42 @@ const bots = {
 	},
 	'howl-bot': {
 		generator: howlBot,
-		type: 'recital'
+		stateful: true
 	}
 }
 
 // TODO: --help
+const { bot, demo } = argv
 
-const demo = argv.live === undefined
+let botNames = Object.keys(bots)
 
-let botsList = Object.keys(bots)
+if (bot) {
+	if (!demo) errorQuit('Demo mode is required to run a single bot only.')
+	if (!botNames.includes(bot))
+		errorQuit(`Unknown bot requested, valid options are: ${botNames.sort().join(', ')}`)
 
-if (argv.bot) {
-	const requestedBot = argv.bot
-
-	if (!botsList.includes(requestedBot)) errorQuit(`Unknown bot requested, valid options are: ${botsList.sort().join(', ')}`)
-
-	botsList = [ requestedBot ]
+	botNames = [ bot ]
 }
 
-for (let bot of botsList) {
-	if (bots[bot]?.type === 'recital') {
-		recitalBotFirstRun()
-	}
+for (let botName of botNames) {
+	let firstPostDelay = 0
+	let postingInterval = ONE_HOUR
 
-	setInterval(
-		() => post({
-			bot,
-			demo,
-			text: bots[bot].generator({ demo })
-		}),
-		demo ? ONE_SECOND * 2 : ONE_HOUR
-	)
+	if (demo)
+		postingInterval = ONE_SECOND * 2
+	else
+		firstPostDelay = getMinutesUntilPostingTime(botName) * 60 * 1000
+
+	setTimeout(() => {
+		doPost(botName)
+		setInterval(() => doPost(botName), postingInterval)
+	}, firstPostDelay)
 }
 
-function recitalBotFirstRun () {
-// 	const currentMinute = getCurrentMinute()
-// 	const statePath = get bot state path here
-// 	const outputState = getOutputState(statePath)
-// 	const outputMinute = outputState[mode].minute
-//
-// 	if !outputMinute set it to currentMinute - how? setOutputState I guess
-//
-// 	if outputMinute === currentMinute recite()
-// 	else setTimeout to go next time the minute comes - calculate how long
-// 	*then* setInterval
+function doPost (botName) {
+	post({
+		botName,
+		demo,
+		text: bots[botName].generator({ mode: demo ? 'demo' : 'live' })
+	})
 }

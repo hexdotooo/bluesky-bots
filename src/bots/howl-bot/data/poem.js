@@ -1,4 +1,4 @@
-export const lines = [
+export const items = [
 	"Howl",
 	"For Carl Solomon",
 	"I",

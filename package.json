@@ -4,8 +4,8 @@
 	"description": "My bots on Bluesky",
 	"type": "module",
 	"scripts": {
-		"demo": "node --env-file=.env ./src/app.mjs",
-		"live": "node --env-file=.env ./src/app.mjs --live"
+		"demo": "node --env-file=.env ./src/app.mjs --demo",
+		"live": "node --env-file=.env ./src/app.mjs"
 	},
 	"author": "Hex (https://hex.ooo/)",
 	"license": "None",

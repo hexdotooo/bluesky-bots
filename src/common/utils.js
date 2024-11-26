@@ -6,11 +6,11 @@ import { Temporal } from 'temporal-polyfill'
 
 const padBotName = botName => botName.padEnd(15, ' ')
 
-export function logPost ({ bot, demo, text }) {
+export function logPost ({ botName, demo, text }) {
 	let logEntry = demo
 		? chalk.red('[Demo: ')
 		: chalk.hex('#FFCC33')('[')
-	logEntry += chalk.hex('#FF9900').bold(padBotName(bot))
+	logEntry += chalk.hex('#FF9900').bold(padBotName(botName))
 	logEntry += ' ' + timestamp()
 	logEntry += demo
 		? chalk.red('] ')
@@ -25,12 +25,11 @@ export function errorQuit (message) {
 	process.exit(0)
 }
 
-export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-export function timestamp () {
-	const pad = num => num.toString().padStart(2, '0')
-
-	return Temporal.Now.instant().toLocaleString('en-GB', {
+export const timestamp = () => Temporal.Now.instant().toLocaleString(
+	'en-GB',
+	{
 		timeZone: 'UTC',
 		timeZoneName: 'short',
 		year: 'numeric',
@@ -39,29 +38,28 @@ export function timestamp () {
 		hour: '2-digit',
 		minute: '2-digit',
 		second: '2-digit'
-	})
-}
+	}
+)
 
-export const getCurrentMinute = () => Temporal.Now.instant().minute
+export const getCurrentMinute = () => Temporal.Now.instant().toLocaleString('en-GB', { minute: 'numeric' })
 
-export function getOutputState (path) {
+const getBotStatePath = botName => `./src/bots/${botName}/state.json`
+
+export function getBotState (botName) {
 	const minute = getCurrentMinute()
 
-	let outputState = {
-		demo: {
-			line: null,
-			minute
-		},
-		live: {
-			line: null,
-			minute
+	let state = {
+		minute,
+		item: {
+			demo: 0,
+			live: 0
 		}
 	}
 
 	try {
-		outputState = JSON.parse(
+		state = JSON.parse(
 			readFileSync(
-				resolve(path),
+				resolve(getBotStatePath(botName)),
 				{ encoding: 'utf8' }
 			)
 		)
@@ -69,11 +67,29 @@ export function getOutputState (path) {
 		if (error.code !== 'ENOENT') errorQuit(error.message)
 	}
 
-	return outputState
+	return state
 }
 
-export function setOutputState ({ outputState, path }) {
-	writeFileSync(path, JSON.stringify(outputState), 'utf8', error => {
+export function setBotState ({ state, botName }) {
+	writeFileSync(getBotStatePath(botName), JSON.stringify(state), 'utf8', error => {
 		if (error) errorQuit(error.message)
 	})
+}
+
+export function getMinutesUntilPostingTime (botName) {
+	const currentMinute = getCurrentMinute()
+
+	const outputMinute = getBotState(botName).minute
+
+	let minutesToWait = 0
+
+	if (outputMinute > currentMinute) {
+		minutesToWait = outputMinute - currentMinute
+	} else if (outputMinute < currentMinute) {
+		minutesToWait = 60 - currentMinute + outputMinute
+	} else if (outputMinute === 0) {
+		minutesToWait = 60 - current
+	}
+
+	return minutesToWait
 }

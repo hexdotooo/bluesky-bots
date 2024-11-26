@@ -1,4 +1,4 @@
-import { errorQuit, getOutputState, setOutputState } from './utils.js'
+import { errorQuit, getBotState, setBotState } from './utils.js'
 
 export function randomWord (list, options) {
 	const word = list[Math.floor(Math.random() * list.length)]
@@ -9,26 +9,21 @@ export function randomWord (list, options) {
 		return word
 }
 
-export function recite ({ bot, demo, lines }) {
-	if (!/^[\w-]+$/.test(bot)) errorQuit(`Can't recite, invalid bot name specified: ${bot}`)
+// Recite an array of items sequentially, maintaining position across
+// process runs
+export function recite ({ botName, mode, items }) {
+	const state = getBotState(botName)
+	let currentItem = state.item[mode]
 
-	const mode = demo ? 'demo' : 'live'
+	const text = items[currentItem]
 
-	const path = `./src/bots/${bot}/state.json`
-	const outputState = getOutputState(path)
-	const startAt = outputState[mode].line
+	currentItem++
 
-	let lineNumber = startAt ?? 0
+	if (currentItem === items.length) currentItem = 0
 
-	let text = lines[lineNumber]
+	state.item[mode] = currentItem
 
-	lineNumber++
-
-	if (lineNumber === lines.length) lineNumber = 0
-
-	outputState[mode].line = lineNumber
-
-	setOutputState({ outputState, path })
+	setBotState({ state, botName })
 
 	return text
 }

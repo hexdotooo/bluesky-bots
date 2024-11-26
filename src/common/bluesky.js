@@ -16,30 +16,30 @@ async function login ({ agent, bot }) {
 	})
 }
 
-export async function post ({ bot, demo, text }) {
+export async function post ({ botName, demo, text }) {
 	if (demo) {
-		logPost({ bot, demo, text })
+		logPost({ botName, demo, text })
 		return
 	}
 
 	const agent = new BskyAgent({
 		service: 'https://bsky.social',
 		persistSession: (_, sessionData) => {
-			sessions[bot] = sessionData
+			sessions[botName] = sessionData
 		}
 	})
 
-	if (!sessions[bot]) {
+	if (!sessions[botName]) {
 		try {
-			login({ agent, bot })
+			login({ agent, botName })
 		} catch(error) {
-			errorQuit(`Couldn't log in as ${bot}! Error was: ${error.message}`)
+			errorQuit(`Couldn't log in as ${botName}! Error was: ${error.message}`)
 		}
 	} else {
 		try {
-			await agent.resumeSession(sessions[bot])
+			await agent.resumeSession(sessions[botName])
 		} catch(error) {
-			errorQuit(`Couldn't resume session for ${bot}! Error was: ${error.message}`)
+			errorQuit(`Couldn't resume session for ${botName}! Error was: ${error.message}`)
 		}
 	}
 

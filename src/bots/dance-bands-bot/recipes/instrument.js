@@ -1,7 +1,8 @@
 export const instrument = {
 	instrument: {
 		items: [
-			'Clarinet', 'Guitar', 'Jug', 'Trombone', 'Trumpet',
+			'Bass', 'Clarinet', 'Guitar', 'Harmonica', 'Jug', 'Piano',
+			'Trombone', 'Trumpet', 'Violin',
 		],
 	},
 }

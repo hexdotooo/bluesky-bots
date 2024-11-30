@@ -1,4 +1,4 @@
-import { getChance, randomItem } from '../../common/utils.js'
+import { oneIn, randomItem } from '../../common/utils.js'
 
 import { recipes } from './recipes/index.js'
 
@@ -23,9 +23,9 @@ function makeRecipe (name) {
 	// rareItems: [ { chance: 75, items: [] }, { chance: 50, items: [] } ]
 	// Process in decreasing order of rarity until one is hit (or none are)
 
-	if (recipe.extraRare && getChance(recipe.extraRare.chance))
+	if (recipe.extraRare && oneIn(recipe.extraRare.chance))
 		itemsToProcess = recipe.extraRare.items
-	else if (recipe.rare && getChance(recipe.rare.chance))
+	else if (recipe.rare && oneIn(recipe.rare.chance))
 		itemsToProcess = recipe.rare.items
 
 	// TODO: Processing the entire tree and picking one item is not efficient.
@@ -46,7 +46,7 @@ function makeRecipe (name) {
 
 	let out = ''
 
-	if (getChance(recipe.chance)) {
+	if (oneIn(recipe.chance)) {
 		out = randomItem(recipeItems)
 		out = recipe.space === 'before' ? ` ${out}` : `${out} `
 	}

@@ -10,8 +10,7 @@ export function randomItem (items) {
 	return items[random(items.length)]
 }
 
-// TODO: Better name
-export function getChance (chance) {
+export function oneIn (chance) {
 	return random(chance) === 1
 }
 

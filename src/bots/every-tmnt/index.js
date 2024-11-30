@@ -1,11 +1,16 @@
 import { randomWord } from '../../common/text.js'
+import { oneIn      } from '../../common/utils.js'
 
 import { adjectives } from './data/adjectives.js'
-import { nouns } from './data/nouns.js'
+import { nouns }      from './data/nouns.js'
 
-// TODO: Rare chance of "Somethings in a something, something power!"
 export default function everyTmnt () {
 	const word = list => randomWord(list, { capitalize: true })
 
-	return `${word(adjectives)} ${word(adjectives)} ${word(adjectives)} ${word(nouns)}s`
+	let out = `${word(adjectives)} ${word(adjectives)} ${word(adjectives)} ${word(nouns)}s`
+
+	if (oneIn(10))
+		out += `, ${word(nouns).toLowerCase()}s in a ${word(nouns).toLowerCase()}, ${word(nouns).toLowerCase()} power!`
+
+	return out
 }

@@ -1,7 +1,8 @@
-import { getBotState, setBotState } from './utils.js'
+import { getBotState, setBotState } from './state.js'
+import { randomItem               } from './utils.js'
 
 export function randomWord (list, options) {
-	const word = list[Math.floor(Math.random() * list.length)]
+	const word = randomItem(list)
 
 	if (options.capitalize)
 		return word[0].toUpperCase() + word.slice(1)

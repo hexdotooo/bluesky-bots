@@ -1,5 +1,5 @@
 import { BskyAgent } from '@atproto/api'
-import { env } from 'node:process'
+import { env       } from 'node:process'
 
 import { logPost, errorQuit } from './utils.js'
 

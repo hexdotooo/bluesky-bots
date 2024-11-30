@@ -1,4 +1,3 @@
-
 import { randomWord } from '../../common/text.js'
 
 import { adjectives } from './data/adjectives.js'

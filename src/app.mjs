@@ -13,36 +13,36 @@ import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 // TODO: Posting minute
 const bots = {
 	'dance-bands-bot': {
-		generator: danceBandsBot
+		generator: danceBandsBot,
 	},
 	'every-tmnt': {
-		generator: everyTmnt
+		generator: everyTmnt,
 	},
 	'howl-bot': {
 		generator: howlBot,
-		stateful: true,
-		interval: 3
-	}
+		stateful:  true,
+		interval:  3,
+	},
 }
 
 let botNames = Object.keys(bots)
 
 const options = minimist(process.argv.slice(2), {
 	alias: {
-		'b': 'bot',
-		'c': 'count'
-	}
+		b: 'bot',
+		c: 'count',
+	},
 })
 
 // TODO: --help
 const {
 	bot: singleBotName,
 	demo: demoMode,
-	once: runOnce
+	once: runOnce,
 } = options
 
 let {
-	count: runCount
+	count: runCount,
 } = options
 
 // Option error checking. Typeof checks are because minimist-lite will combine
@@ -51,7 +51,7 @@ let {
 if (singleBotName) {
 	if (!demoMode)
 		errorQuit('Demo mode is required to run a single bot only')
-	if (typeof(singleBotName) !== 'string')
+	if (typeof singleBotName !== 'string')
 		errorQuit('Multiple names given for single bot mode')
 	if (!botNames.includes(singleBotName))
 		errorQuit(`Unknown bot requested, valid options are: ${botNames.sort().join(', ')}`)
@@ -60,7 +60,7 @@ if (singleBotName) {
 }
 
 if (runCount) {
-	if (typeof(runCount) !== 'number')
+	if (typeof runCount !== 'number')
 		errorQuit('Multiple values given for --count')
 	if (runOnce)
 		errorQuit('Specify either of --once or --count')
@@ -70,7 +70,7 @@ if (runOnce) runCount = 1
 
 const botRuns = {}
 
-for (let botName of botNames) {
+for (const botName of botNames) {
 	let firstPostDelay = ONE_MINUTE * getMinutesUntilPostingTime(botName)
 	let postingInterval = ONE_HOUR
 
@@ -91,7 +91,7 @@ for (let botName of botNames) {
 	setTimeout(startRun, firstPostDelay, botName, postingInterval)
 }
 
-function startRun(botName, postingInterval) {
+function startRun (botName, postingInterval) {
 	botRuns[botName] = 0
 
 	doPost(botName)
@@ -105,19 +105,18 @@ function doPost (botName) {
 	const { generator, interval = 1 } = bots[botName]
 	const text = generator({ demoMode })
 
-	if (demoMode) {
+	if (demoMode)
 		logPost({
 			botName,
 			interval,
 			demoMode,
-			text
+			text,
 		})
-	} else {
+	else
 		post({
 			botName,
-			text
+			text,
 		})
-	}
 
 	botRuns[botName]++
 }

@@ -1,4 +1,4 @@
-import { errorQuit, getBotState, setBotState } from './utils.js'
+import { getBotState, setBotState } from './utils.js'
 
 export function randomWord (list, options) {
 	const word = list[Math.floor(Math.random() * list.length)]

@@ -3,7 +3,7 @@ import { env } from 'node:process'
 
 import { logPost, errorQuit } from './utils.js'
 
-let sessions = {}
+const sessions = {}
 
 async function login ({ agent, bot }) {
 	const password = env[`password_${bot}`]
@@ -12,35 +12,34 @@ async function login ({ agent, bot }) {
 
 	await agent.login({
 		identifier: `${bot}.bsky.social`,
-		password:   password
+		password,
 	})
 }
 
 export async function post ({ botName, text }) {
 	const agent = new BskyAgent({
-		service: 'https://bsky.social',
+		service:        'https://bsky.social',
 		persistSession: (_, sessionData) => {
 			sessions[botName] = sessionData
-		}
+		},
 	})
 
-	if (!sessions[botName]) {
+	if (!sessions[botName])
 		try {
 			login({ agent, botName })
-		} catch(error) {
+		} catch (error) {
 			errorQuit(`Couldn't log in as ${botName}! Error was: ${error.message}`)
 		}
-	} else {
+	else
 		try {
 			await agent.resumeSession(sessions[botName])
-		} catch(error) {
+		} catch (error) {
 			errorQuit(`Couldn't resume session for ${botName}! Error was: ${error.message}`)
 		}
-	}
 
 	try {
 		await agent.post({ text })
-	} catch(error) {
+	} catch (error) {
 		errorQuit(`Couldn't post to ${botName}! Error was: ${error.message}`)
 	}
 

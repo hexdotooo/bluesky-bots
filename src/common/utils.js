@@ -36,8 +36,8 @@ export function getBotState (botName) {
 		minute,
 		item: {
 			demo: 0,
-			live: 0
-		}
+			live: 0,
+		},
 	}
 
 	try {
@@ -67,13 +67,12 @@ export function getMinutesUntilPostingTime (botName) {
 
 	let minutesToWait = 0
 
-	if (outputMinute > currentMinute) {
+	if (outputMinute > currentMinute)
 		minutesToWait = outputMinute - currentMinute
-	} else if (outputMinute < currentMinute) {
+	else if (outputMinute < currentMinute)
 		minutesToWait = 60 - currentMinute + outputMinute
-	} else if (outputMinute === 0) {
-		minutesToWait = 60 - current
-	}
+	else if (outputMinute === 0)
+		minutesToWait = 60 - currentMinute
 
 	return minutesToWait
 }

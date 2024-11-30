@@ -8,14 +8,14 @@ export const ONE_HOUR = ONE_MINUTE * 60
 export const timestamp = () => Temporal.Now.instant().toLocaleString(
 	'en-GB',
 	{
-		timeZone: 'UTC',
+		timeZone:     'UTC',
 		timeZoneName: 'short',
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit'
+		year:         'numeric',
+		month:        '2-digit',
+		day:          '2-digit',
+		hour:         '2-digit',
+		minute:       '2-digit',
+		second:       '2-digit',
 	}
 )
 

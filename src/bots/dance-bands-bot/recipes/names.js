@@ -1,7 +1,6 @@
 export const names = {
 	adjective: {
-		items:  [ 'Cactus', 'General', 'Jolly', 'Smilin\'' ],
-		space:  'after',
+		items:  [ 'Cactus ', 'General ', 'Jolly ', 'Smilin\' ' ],
 		chance: 20,
 	},
 	femaleName: {
@@ -159,12 +158,11 @@ export const names = {
 	},
 	middleInitialOrNickname: {
 		items: [
-			'A.', 'B.', 'C.', 'D.', 'E.', 'F.', 'G.', 'H.', 'I.', 'J.', 'K.',
-			'L.', 'M.', 'N.', 'O.', 'P.', 'Q.', 'R.', 'S.', 'T.', 'U.', 'V.',
-			'W.', 'X.', 'Y.', 'Z.', '"Finkelschnitz"', '"Red"', '"Scat"',
-			'"Stomp"',
+			'A. ', 'B. ', 'C. ', 'D. ', 'E. ', 'F. ', 'G. ', 'H. ', 'I. ', 'J. ', 'K. ',
+			'L. ', 'M. ', 'N. ', 'O. ', 'P. ', 'Q. ', 'R. ', 'S. ', 'T. ', 'U. ', 'V. ',
+			'W. ', 'X. ', 'Y. ', 'Z. ', '"Finkelschnitz" ', '"Red" ', '"Scat" ',
+			'"Stomp" ',
 		],
-		space:  'after',
 		chance: 27,
 	},
 	lastName: {
@@ -269,10 +267,9 @@ export const names = {
 	},
 	honorific: {
 		items: [
-			'"The King of the Polkas"',
-			[ '"The ', 'honorificAdjective', ' ', 'honorificNoun', '"' ],
+			' "The King of the Polkas"',
+			[ ' "The ', 'honorificAdjective', ' ', 'honorificNoun', '"' ],
 		],
-		space:  'before',
 		chance: 30,
 	},
 	honorificAdjective: {

@@ -15,41 +15,34 @@ export default function generateBand () {
 }
 
 function makeRecipe (name) {
-	const recipe = recipes[name]
+	const recipeReducer = (itemsOut, element) => recipes[element]
+		? itemsOut + makeRecipe(element)
+		: itemsOut + element
 
-	let itemsToProcess = recipe.items
+	const processItem = element => Array.isArray(element)
+		? element.reduce(recipeReducer, '')
+		: element
+
+	const recipe = recipes[name]
 
 	// TODO: Change hardcoded "rare" and "extra rare" items into an array:
 	// rareItems: [ { chance: 75, items: [] }, { chance: 50, items: [] } ]
 	// Process in decreasing order of rarity until one is hit (or none are)
 
-	if (recipe.extraRare && oneIn(recipe.extraRare.chance))
-		itemsToProcess = recipe.extraRare.items
-	else if (recipe.rare && oneIn(recipe.rare.chance))
-		itemsToProcess = recipe.rare.items
+	const rareType = recipe.extraRare
+		? 'extraRare'
+		: recipe.rare
+			? 'rare'
+			: undefined
 
-	// TODO: Processing the entire tree and picking one item is not efficient.
-	// A random item should be chosen first, then processed
+	let selectedItem
 
-	const recipeItems = itemsToProcess.map( item => {
-		if (Array.isArray(item))
-			return item.reduce( (itemsOut, recipe) => {
-				return recipes[recipe]
-					? itemsOut + makeRecipe(recipe)
-					: itemsOut + recipe
-			}, '')
-		else
-			return item
-	})
+	if (rareType && oneIn(recipe[rareType].chance))
+		selectedItem = randomItem(recipe[rareType].items)
+	else if (recipe.chance)
+		selectedItem = oneIn(recipe.chance) ? randomItem(recipe.items) : ''
+	else
+		selectedItem = randomItem(recipe.items)
 
-	if (!recipe.chance) return randomItem(recipeItems)
-
-	let out = ''
-
-	if (oneIn(recipe.chance)) {
-		out = randomItem(recipeItems)
-		out = recipe.space === 'before' ? ` ${out}` : `${out} `
-	}
-
-	return out
+	return processItem(selectedItem)
 }

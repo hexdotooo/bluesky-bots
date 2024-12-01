@@ -16,8 +16,7 @@ export const band = {
 		],
 	},
 	instrumentOptional: {
-		items:  [ 'Jug', 'Marimba', 'Saxophone', 'Tympany' ],
-		space:  'after',
+		items:  [ 'Jug ', 'Marimba ', 'Saxophone ', 'Tympany ' ],
 		chance: 20,
 	},
 	bandNumeric: {

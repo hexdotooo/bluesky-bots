@@ -1,39 +1,50 @@
+import r from './recipeNames.js'
+
 export const orchestra = {
-	orchestra: {
+	[r.ORCHESTRA]: {
 		items: [
 			[
-				'place', ' ', 'orchestraSpecialty', 'Orchestra',
-				'orchestraSuffix',
+				r.PLACE, ' ', r.ORCHESTRA_SPECIALTY, 'Orchestra',
+				r.ORCHESTRA_SUFFIX,
 			],
-			[ 'place', ' Orchestra', 'orchestraSuffix' ],
-			[ 'orchestraSpecialty', 'Orchestra', 'orchestraSuffix' ],
-			[ 'orchestraSpecialty', 'Orchestra of ', 'generalPlace' ],
+			[ r.PLACE, ' Orchestra', r.ORCHESTRA_SUFFIX ],
+			[ r.ORCHESTRA_SPECIALTY, 'Orchestra', r.ORCHESTRA_SUFFIX ],
+			[ r.ORCHESTRA_SPECIALTY, 'Orchestra of ', r.GENERAL_PLACE ],
 		],
 	},
-	orchestraSpecialty: {
+	[r.ORCHESTRA_SPECIALTY]: {
 		items: [
-			[ 'orchestraSpecialtyPrefix', 'orchestraSpecialtyMain' ],
+			[ r.ORCHESTRA_SPECIALTY_PREFIX, r.ORCHESTRA_SPECIALTY_MAIN ],
 		],
 	},
-	orchestraSpecialtyPrefix: {
-		items: [
-			'Arcadia Peacock ', 'Benson ', 'Continental ', 'Elite ',
-			'Hotel Astor ', 'Hour of Charm ', 'International ', 'Jazzarimba ',
-			'Million Dollar ', 'Party Dance ', 'Royal ', 'Specialty ', 'Victor ',
-		],
-		chance: 5,
+	[r.ORCHESTRA_SPECIALTY_PREFIX]: {
+		items: [],
+		rare:  {
+			10: {
+				items: [
+					'Arcadia Peacock ', 'Benson ', 'Continental ', 'Elite ',
+					'Hotel Astor ', 'Hour of Charm ', 'International ',
+					'Jazzarimba ', 'Million Dollar ', 'Party Dance ', 'Royal ',
+					'Specialty ', 'Victor ',
+				],
+			},
+		},
 	},
-	orchestraSpecialtyMain: {
+	[r.ORCHESTRA_SPECIALTY_MAIN]: {
 		items: [
-			'All-Girl ', 'Cafe ', 'Calypso ', 'Concert ', 'Dance ', 'Folk ',
-			'Hilo Hawaiian ', 'Pier ', 'Rainbo ', 'Salon ', 'Waltz ',
+			'All-Girl ', 'Cafe ', 'Calypso ', 'Concert ', 'Dance ',
+			'Folk ', 'Hilo Hawaiian ', 'Pier ', 'Rainbo ', 'Salon ',
+			'Waltz ',
 		],
-		chance: 5,
 	},
-	orchestraSuffix: {
-		items: [
-			' and Choir', ' De Luxe',
-		],
-		chance: 10,
+	[r.ORCHESTRA_SUFFIX]: {
+		items: [],
+		rare:  {
+			10: {
+				items: [
+					' and Choir', ' De Luxe',
+				],
+			},
+		},
 	},
 }

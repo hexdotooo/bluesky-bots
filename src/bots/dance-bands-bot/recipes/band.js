@@ -1,162 +1,167 @@
+import r from './recipeNames.js'
+
 export const band = {
-	alliterativeBand: {
+	[r.ALLITERATIVE_BAND]: {
 		items: [
-			[ 'lastNameB', '\'s ', 'memberNounsB' ],
-			[ 'lastNameC', '\'s ', 'memberNounsC' ],
-			[ 'lastNameD', '\'s ', 'memberNounsD' ],
-			[ 'lastNameF', '\'s ', 'memberNounsF' ],
-			[ 'lastNameG', '\'s ', 'memberNounsG' ],
-			[ 'lastNameH', '\'s ', 'memberNounsH' ],
-			[ 'lastNameM', '\'s ', 'memberNounsM' ],
-			[ 'lastNameP', '\'s ', 'memberNounsP' ],
-			[ 'lastNameR', '\'s ', 'memberNounsR' ],
-			[ 'lastNameS', '\'s ', 'memberNounsS' ],
-			[ 'lastNameT', '\'s ', 'memberNounsT' ],
-			[ 'lastNameW', '\'s ', 'memberNounsW' ],
+			[ r.LAST_NAME_B, "'s ", r.MEMBER_NOUNS_B ],
+			[ r.LAST_NAME_C, "'s ", r.MEMBER_NOUNS_C ],
+			[ r.LAST_NAME_D, "'s ", r.MEMBER_NOUNS_D ],
+			[ r.LAST_NAME_F, "'s ", r.MEMBER_NOUNS_F ],
+			[ r.LAST_NAME_G, "'s ", r.MEMBER_NOUNS_G ],
+			[ r.LAST_NAME_H, "'s ", r.MEMBER_NOUNS_H ],
+			[ r.LAST_NAME_K, "'s ", r.MEMBER_NOUNS_K ],
+			[ r.LAST_NAME_M, "'s ", r.MEMBER_NOUNS_M ],
+			[ r.LAST_NAME_P, "'s ", r.MEMBER_NOUNS_P ],
+			[ r.LAST_NAME_R, "'s ", r.MEMBER_NOUNS_R ],
+			[ r.LAST_NAME_S, "'s ", r.MEMBER_NOUNS_S ],
+			[ r.LAST_NAME_T, "'s ", r.MEMBER_NOUNS_T ],
+			[ r.LAST_NAME_W, "'s ", r.MEMBER_NOUNS_W ],
 		],
 	},
-	instrumentOptional: {
+	[r.INSTRUMENT_OPTIONAL]: {
 		items:  [ 'Jug ', 'Marimba ', 'Saxophone ', 'Tympany ' ],
 		chance: 20,
 	},
-	bandNumeric: {
+	[r.BAND_NUMERIC]: {
 		items: [
 			'Band', 'Ensemble', 'Five', 'Trio', 'Quartet', 'Quartette',
 			'Quintet', 'Sax-O-Tette', 'Sextet', 'Strings', 'Symphonette',
 		],
 	},
-	memberNounPrefix: {
+	[r.MEMBER_NOUN_PREFIX]: {
 		items: [
-			'All Star', 'Barn Dance', 'Bashful', 'Bearcats', 'Black and White',
-			'Blue Denim', 'Blue Grass', 'Boogie Woogie', 'Boulevard',
-			'Buster Brown', 'Cabin', 'Cactus', 'Cool', 'Cowboy', 'Crazy',
-			'Dependable', 'Dixie Lily', 'Famous', 'Happiness', 'Hoosier', 'Hot',
-			'Hot Box', 'House', 'Jazz', 'Jolly', 'Jungle', 'Lucky', 'Master',
-			'Melody', 'Moana', 'Musical', 'Old Hickory', 'Original', 'Novelty',
-			'Peerless', 'Pick-A-Rib', 'Polka', 'Radio', 'Rainbow', 'Rambling',
-			'Rhythm', 'Round Up', 'Royal', 'Skyline', 'Statler', 'Swinging',
-			'Tailgate', 'Tivoli', 'Torrid', 'Varsity', 'Western',
+			'All Star ', 'Barn Dance ', 'Bashful ', 'Black and White ',
+			'Blue Denim ', 'Blue Grass ', 'Boogie Woogie ',	'Boulevard ',
+			'Buster Brown ', 'Cabin ', 'Cactus ', 'Cool ', 'Cowboy ', 'Crazy ',
+			'Dependable ', 'Dixie Lily ', 'Famous ', 'Happiness ', 'Hoosier ',
+			'Hot ', 'Hot Box ', 'House ', 'Jazz ', 'Jolly ', 'Jungle ',
+			'Lucky ', 'Master ', 'Melody ', 'Moana ', 'Musical ',
+			'Old Hickory ', 'Original ', 'Novelty ', 'Peerless ',
+			'Pick-A-Rib ', 'Polka ', 'Radio ', 'Rainbow ', 'Rambling ',
+			'Rhythm ', 'Round Up ', 'Royal ', 'Skyline ', 'Statler ',
+			'Swinging ', 'Tailgate ', 'Tivoli ', 'Torrid ', 'Varsity ',
+			'Western ',
 		],
 	},
-	number: {
+	[r.NUMBER]: {
 		items: [ 'Three', 'Four', 'Five', 'Six', 'Seven' ],
 	},
-	memberNouns: {
+	[r.MEMBER_NOUNS]: {
 		items: [
-			[ 'memberNounsB' ],
-			[ 'memberNounsC' ],
-			[ 'memberNounsD' ],
-			[ 'memberNounsF' ],
-			[ 'memberNounsG' ],
-			[ 'memberNounsH' ],
-			[ 'memberNounsI' ],
-			[ 'memberNounsJ' ],
-			[ 'memberNounsK' ],
-			[ 'memberNounsM' ],
-			[ 'memberNounsP' ],
-			[ 'memberNounsR' ],
-			[ 'memberNounsS' ],
-			[ 'memberNounsT' ],
-			[ 'memberNounsV' ],
-			[ 'memberNounsW' ],
-			[ 'memberNounsY' ],
+			[ r.MEMBER_NOUNS_B ],
+			[ r.MEMBER_NOUNS_C ],
+			[ r.MEMBER_NOUNS_D ],
+			[ r.MEMBER_NOUNS_F ],
+			[ r.MEMBER_NOUNS_G ],
+			[ r.MEMBER_NOUNS_H ],
+			[ r.MEMBER_NOUNS_I ],
+			[ r.MEMBER_NOUNS_J ],
+			[ r.MEMBER_NOUNS_K ],
+			[ r.MEMBER_NOUNS_M ],
+			[ r.MEMBER_NOUNS_P ],
+			[ r.MEMBER_NOUNS_R ],
+			[ r.MEMBER_NOUNS_S ],
+			[ r.MEMBER_NOUNS_T ],
+			[ r.MEMBER_NOUNS_V ],
+			[ r.MEMBER_NOUNS_W ],
+			[ r.MEMBER_NOUNS_Y ],
 		],
 	},
-	memberNounsB: {
+	[r.MEMBER_NOUNS_B]: {
 		items: [
-			'Babies', 'Band', 'Be-Boppers', 'Blazers', 'Blue-Blowers',
-			'Bluesicians', 'Bob Cats', 'Bohemians', 'Bombadiers', 'Boys',
-			'Briarhoppers',
+			'Babies', 'Band', 'Be-Boppers', 'Bearcats', 'Blazers',
+			'Blue-Blowers',	'Bluesicians', 'Bob Cats', 'Bohemians',
+			'Bombadiers', 'Boys', 'Briarhoppers',
 		],
 	},
-	memberNounsC: {
+	[r.MEMBER_NOUNS_C]: {
 		items: [
 			'Canadians', 'Caravan', 'Caroleers', 'Cats', 'Cats and Jammers',
 			'Chicagoans', 'Clodhoppers', 'Colonels', 'Cornellians', 'Cowboys',
 			'Cowhands', 'Crazy Tennesseans',
 		],
 	},
-	memberNounsD: {
+	[r.MEMBER_NOUNS_D]: {
 		items: [
 			'Dance Makers', 'Debs', 'Diamonds', 'Dixielanders', 'Dude Ranchers',
 			'Dukes',
 		],
 	},
-	memberNounsF: {
+	[r.MEMBER_NOUNS_F]: {
 		items: [
 			'Feetwarmers',
 		],
 	},
-	memberNounsG: {
+	[r.MEMBER_NOUNS_G]: {
 		items: [
 			'Gang', 'Girls', 'Girls of the Golden West', 'Globe Trotters',
 		],
 	},
-	memberNounsH: {
+	[r.MEMBER_NOUNS_H]: {
 		items: [
 			'Hawaiians', 'Highpointers', 'Hillbillies', 'Home Boys', 'Hounds',
 			'Hunters',
 		],
 	},
-	memberNounsI: {
+	[r.MEMBER_NOUNS_I]: {
 		items: [
 			'Islanders',
 		],
 	},
-	memberNounsJ: {
+	[r.MEMBER_NOUNS_J]: {
 		items: [
 			'Jesters',
 		],
 	},
-	memberNounsK: {
+	[r.MEMBER_NOUNS_K]: {
 		items: [
 			'Knights',
 		],
 	},
-	memberNounsM: {
+	[r.MEMBER_NOUNS_M]: {
 		items: [
 			'Melody Artists', 'Melody Makers', 'Merry Madcaps', 'Merrymakers',
 			'Millers', 'Millionaires of Rhythm', 'Mountaineers', 'Music',
 			'Music Box Band',
 		],
 	},
-	memberNounsP: {
+	[r.MEMBER_NOUNS_P]: {
 		items: [
 			'Pardners', 'Pennsylvanians', 'Pioneers', 'Plainsmen', 'Polkateers',
 			'Pricklypears',
 		],
 	},
-	memberNounsR: {
+	[r.MEMBER_NOUNS_R]: {
 		items: [
 			'Ramblers', 'Ranch Boys', 'Rangers', 'Rascals', 'Rhythmasters',
 			'Rhythmists', 'Riders', 'Ridge Runners', 'Rockers', 'Rogues',
 			'Rounders',
 		],
 	},
-	memberNounsS: {
+	[r.MEMBER_NOUNS_S]: {
 		items: [
 			'Sagedusters', 'Serenaders', 'Singers', 'Slickers',
 			'Sons of the Golden West', 'Stompers', 'String Band', 'Strings',
 			'Sweethearts', 'Swing Wing', 'Swingsters', 'Syncopaters',
 		],
 	},
-	memberNounsT: {
+	[r.MEMBER_NOUNS_T]: {
 		items: [
 			'Tennesseans', 'Texsons', 'Tornadoes', 'Troopers', 'Tu-Tones',
 			'Twisters',
 		],
 	},
-	memberNounsV: {
+	[r.MEMBER_NOUNS_V]: {
 		items: [
 			'Vagabonds',
 		],
 	},
-	memberNounsW: {
+	[r.MEMBER_NOUNS_W]: {
 		items: [
 			'Westerners', 'Wranglers',
 		],
 	},
-	memberNounsY: {
+	[r.MEMBER_NOUNS_Y]: {
 		items: [
 			'Yanks',
 		],

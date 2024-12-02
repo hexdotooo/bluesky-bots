@@ -1,50 +1,46 @@
+import r from './recipeNames.js'
+
 export const base = {
-	bandName: {
+	[r.BAND_NAME]: {
 		items: [
-			[ 'leaderPossessiveOrThe', 'bandLabel' ],
+			[ r.LEADER_POSSESSIVE_OR_THE, r.BAND_LABEL ],
 		],
 		rare: {
 			chance: 50,
 			items:  [
-				[ 'femaleLeaderAndHer', 'instrument' ],
-				[ 'maleLeaderAndHis', 'instrument' ],
-				[ 'leaderSingularPossessive', ' Original ', 'bandLabel' ],
-				[ 'leaderName', ' with string band' ],
-				[ 'alliterativeBand' ],
-				[ 'number', ' ', 'lastName', ' ', 'siblings' ],
+				[ r.FEMALE_LEADER_AND_HER, r.INSTRUMENT ],
+				[ r.MALE_LEADER_AND_HIS, r.INSTRUMENT ],
+				[ r.LEADER_SINGULAR_POSSESSIVE, ' Original ', r.BAND_LABEL ],
+				[ r.LEADER_NAME, ' with string band' ],
+				[ r.ALLITERATIVE_BAND ],
+				[ r.NUMBER, ' ', r.LAST_NAME, r.SIBLINGS ],
 			],
 		},
 		extraRare: {
 			chance: 100,
 			items:  [
 				[
-					'Happy ', 'lastName', 'singularPossessiveUngendered',
-					'Happy-Go-Lucky ', 'memberNounsH',
+					'Happy ', r.LAST_NAME, r.SINGULAR_POSSESSIVE_UNGENDERED,
+					'Happy-Go-Lucky ', r.MEMBER_NOUNS_H,
 				],
 				[
-					'Rocky ', 'lastName', 'singularPossessiveUngendered',
-					'Rocky Road ', 'memberNounsR',
+					'Rocky ', r.LAST_NAME, r.SINGULAR_POSSESSIVE_UNGENDERED,
+					'Rocky Road ', r.MEMBER_NOUNS_R,
 				],
 			],
 		},
 	},
-	bandLabel: {
+	[r.BAND_LABEL]: {
 		items: [
-			[ 'memberNouns' ],
-			[ 'memberNounPrefix', ' ', 'memberNouns' ],
-			[ 'place', ' ', 'memberNounPrefix', ' ', 'memberNouns' ],
-			[ 'place', ' ', 'memberNouns' ],
-			[ 'number', ' ', 'memberNouns' ],
-			[ 'memberNounPrefix', ' ', 'bandNumeric' ],
-			[ 'instrumentOptional', 'bandNumeric' ],
-			[ 'bandNumeric' ],
-			[ 'orchestra' ],
-			[ 'orchestra' ],
-			[ 'orchestra' ],
-			[ 'orchestra' ],
-		],
-		rareItems: [
-			[ 'Big ', 'number' ],
+			[ r.MEMBER_NOUNS ],
+			[ r.MEMBER_NOUN_PREFIX, r.MEMBER_NOUNS ],
+			[ r.PLACE, ' ', r.MEMBER_NOUN_PREFIX, r.MEMBER_NOUNS ],
+			[ r.PLACE, ' ', r.MEMBER_NOUNS ],
+			[ r.NUMBER, ' ', r.MEMBER_NOUNS ],
+			[ r.MEMBER_NOUN_PREFIX, r.BAND_NUMERIC ],
+			[ r.INSTRUMENT_OPTIONAL, r.BAND_NUMERIC ],
+			[ r.BAND_NUMERIC ],
+			[ r.ORCHESTRA ],
 		],
 	},
 }

@@ -1,283 +1,304 @@
+import r from './recipeNames.js'
+
 export const names = {
-	adjective: {
-		items:  [ 'Cactus ', 'General ', 'Jolly ', 'Smilin\' ' ],
-		chance: 20,
+	[r.ADJECTIVE]: {
+		items: [],
+		rare:  {
+			20: {
+				items: [
+					'Cactus ', 'General ', 'Jolly ', "Smilin' ",
+				],
+			},
+		},
 	},
-	femaleName: {
-		items: [ [ 'femaleFirstName', ' ', 'lastName' ] ],
+	[r.FEMALE_NAME]: {
+		items: [ [ r.FEMALE_FIRST_NAME, ' ', r.LAST_NAME ] ],
 	},
-	maleName: {
+	[r.MALE_NAME]: {
 		items: [
-			[ 'adjective', 'maleFirstName', ' ', 'lastName', 'honorific' ],
+			[ r.ADJECTIVE, r.MALE_FIRST_NAME, ' ', r.LAST_NAME, r.HONORIFIC ],
 			[
-				'maleFirstName', ' ', 'middleInitialOrNickname', 'lastName',
-				'honorific',
+				r.MALE_FIRST_NAME, r.MIDDLE_INITIAL_OR_NICKNAME,
+				r.LAST_NAME, r.HONORIFIC,
 			],
 		],
 		rare: {
-			chance: 75,
-			items:  [
-				[ '"Happy" ', 'maleFirstNameH', ' ', 'lastNameH' ],
-			],
+			75: {
+				items: [
+					[ '"Happy" ', r.MALE_FIRST_NAME_H, ' ', r.LAST_NAME_H ],
+				],
+			},
 		},
 	},
-	femaleFirstName: {
+	[r.FEMALE_FIRST_NAME]: {
 		items: [
-			[ 'femaleFirstNameA' ], [ 'femaleFirstNameB' ], [ 'femaleFirstNameC' ],
-			[ 'femaleFirstNameD' ], [ 'femaleFirstNameE' ], [ 'femaleFirstNameG' ],
-			[ 'femaleFirstNameH' ], [ 'femaleFirstNameI' ], [ 'femaleFirstNameJ' ],
-			[ 'femaleFirstNameK' ], [ 'femaleFirstNameL' ], [ 'femaleFirstNameM' ],
-			[ 'femaleFirstNameN' ], [ 'femaleFirstNameO' ], [ 'femaleFirstNameP' ],
-			[ 'femaleFirstNameR' ], [ 'femaleFirstNameS' ], [ 'femaleFirstNameV' ],
+			[ r.FEMALE_FIRST_NAME_A ], [ r.FEMALE_FIRST_NAME_B ],
+			[ r.FEMALE_FIRST_NAME_C ], [ r.FEMALE_FIRST_NAME_D ],
+			[ r.FEMALE_FIRST_NAME_E ], [ r.FEMALE_FIRST_NAME_G ],
+			[ r.FEMALE_FIRST_NAME_H ], [ r.FEMALE_FIRST_NAME_I ],
+			[ r.FEMALE_FIRST_NAME_J ], [ r.FEMALE_FIRST_NAME_K ],
+			[ r.FEMALE_FIRST_NAME_L ], [ r.FEMALE_FIRST_NAME_M ],
+			[ r.FEMALE_FIRST_NAME_N ], [ r.FEMALE_FIRST_NAME_O ],
+			[ r.FEMALE_FIRST_NAME_P ], [ r.FEMALE_FIRST_NAME_R ],
+			[ r.FEMALE_FIRST_NAME_S ], [ r.FEMALE_FIRST_NAME_V ],
 		],
 	},
-	femaleFirstNameA: {
+	[r.FEMALE_FIRST_NAME_A]: {
 		items: [ 'Anita', 'Ann' ],
 	},
-	femaleFirstNameB: {
+	[r.FEMALE_FIRST_NAME_B]: {
 		items: [ 'Bessie' ],
 	},
-	femaleFirstNameC: {
+	[r.FEMALE_FIRST_NAME_C]: {
 		items: [ 'Carrie', 'Cindy', 'Connie' ],
 	},
-	femaleFirstNameD: {
+	[r.FEMALE_FIRST_NAME_D]: {
 		items: [ 'Dolly', 'Dorothy' ],
 	},
-	femaleFirstNameE: {
+	[r.FEMALE_FIRST_NAME_E]: {
 		items: [ 'Elizabeth', 'Ellen', 'Elsie', 'Ethel', 'Evelyn' ],
 	},
-	femaleFirstNameG: {
+	[r.FEMALE_FIRST_NAME_G]: {
 		items: [ 'Georgia', 'Ginny', 'Gloria' ],
 	},
-	femaleFirstNameH: {
+	[r.FEMALE_FIRST_NAME_H]: {
 		items: [ 'Helen' ],
 	},
-	femaleFirstNameI: {
+	[r.FEMALE_FIRST_NAME_I]: {
 		items: [ 'Irene' ],
 	},
-	femaleFirstNameJ: {
+	[r.FEMALE_FIRST_NAME_J]: {
 		items: [ 'Jane', 'June' ],
 	},
-	femaleFirstNameK: {
+	[r.FEMALE_FIRST_NAME_K]: {
 		items: [ 'Kelly', 'Kitty' ],
 	},
-	femaleFirstNameL: {
+	[r.FEMALE_FIRST_NAME_L]: {
 		items: [ 'Lauren', 'Louise', 'Lucy', 'Lynn' ],
 	},
-	femaleFirstNameM: {
+	[r.FEMALE_FIRST_NAME_M]: {
 		items: [
 			'Margaret', 'Marie', 'Marion', 'Martha', 'Mary', 'Maxine',
 			'Merline',
 		],
 	},
-	femaleFirstNameN: {
+	[r.FEMALE_FIRST_NAME_N]: {
 		items: [ 'Nellie', 'Nora' ],
 	},
-	femaleFirstNameO: {
+	[r.FEMALE_FIRST_NAME_O]: {
 		items: [ 'Olive' ],
 	},
-	femaleFirstNameP: {
+	[r.FEMALE_FIRST_NAME_P]: {
 		items: [ 'Patsy' ],
 	},
-	femaleFirstNameR: {
+	[r.FEMALE_FIRST_NAME_R]: {
 		items: [ 'Rosetta', 'Rosy', 'Ruby' ],
 	},
-	femaleFirstNameS: {
+	[r.FEMALE_FIRST_NAME_S]: {
 		items: [ 'Sally', 'Shannon', 'Sibyl' ],
 	},
-	femaleFirstNameV: {
+	[r.FEMALE_FIRST_NAME_V]: {
 		items: [ 'Virginia', 'Vivian' ],
 	},
-	maleFirstName: {
+	[r.MALE_FIRST_NAME]: {
 		items: [
-			[ 'maleFirstNameA' ], [ 'maleFirstNameB' ], [ 'maleFirstNameC' ],
-			[ 'maleFirstNameD' ], [ 'maleFirstNameE' ], [ 'maleFirstNameF' ],
-			[ 'maleFirstNameG' ], [ 'maleFirstNameH' ], [ 'maleFirstNameJ' ],
-			[ 'maleFirstNameK' ], [ 'maleFirstNameL' ], [ 'maleFirstNameM' ],
-			[ 'maleFirstNameO' ], [ 'maleFirstNameP' ], [ 'maleFirstNameR' ],
-			[ 'maleFirstNameS' ], [ 'maleFirstNameT' ], [ 'maleFirstNameV' ],
-			[ 'maleFirstNameW' ],
+			[ r.MALE_FIRST_NAME_A ], [ r.MALE_FIRST_NAME_B ],
+			[ r.MALE_FIRST_NAME_C ], [ r.MALE_FIRST_NAME_D ],
+			[ r.MALE_FIRST_NAME_E ], [ r.MALE_FIRST_NAME_F ],
+			[ r.MALE_FIRST_NAME_G ], [ r.MALE_FIRST_NAME_H ],
+			[ r.MALE_FIRST_NAME_J ], [ r.MALE_FIRST_NAME_K ],
+			[ r.MALE_FIRST_NAME_L ], [ r.MALE_FIRST_NAME_M ],
+			[ r.MALE_FIRST_NAME_O ], [ r.MALE_FIRST_NAME_P ],
+			[ r.MALE_FIRST_NAME_R ], [ r.MALE_FIRST_NAME_S ],
+			[ r.MALE_FIRST_NAME_T ], [ r.MALE_FIRST_NAME_V ],
+			[ r.MALE_FIRST_NAME_W ],
 		],
 	},
-	maleFirstNameA: {
+	[r.MALE_FIRST_NAME_A]: {
 		items: [ 'Abbey', 'Albert', 'Arthur' ],
 	},
-	maleFirstNameB: {
+	[r.MALE_FIRST_NAME_B]: {
 		items: [ 'Bill', 'Bob', 'Bobby', 'Bud',	'Buddy', 'Bull Moose' ],
 	},
-	maleFirstNameC: {
+	[r.MALE_FIRST_NAME_C]: {
 		items: [ 'Carter', 'Clyde', 'Curly' ],
 	},
-	maleFirstNameD: {
+	[r.MALE_FIRST_NAME_D]: {
 		items: [ 'Donnie' ],
 	},
-	maleFirstNameE: {
+	[r.MALE_FIRST_NAME_E]: {
 		items: [ 'Earl', 'Eddie', 'Eddy', 'Edward', 'Edwin', 'Ernest' ],
 	},
-	maleFirstNameF: {
+	[r.MALE_FIRST_NAME_F]: {
 		items: [ 'Frank', 'Frankie', 'Fred', 'Freddie', 'Fritz' ],
 	},
-	maleFirstNameG: {
+	[r.MALE_FIRST_NAME_G]: {
 		items: [ 'Gene', 'George', 'Glen' ],
 	},
-	maleFirstNameH: {
+	[r.MALE_FIRST_NAME_H]: {
 		items: [ 'Hank', 'Hector', 'Henry', 'Hot Lips', 'Howard' ],
 	},
-	maleFirstNameJ: {
+	[r.MALE_FIRST_NAME_J]: {
 		items: [ 'Jack', 'James', 'John', 'Johnnie', 'Johnny' ],
 	},
-	maleFirstNameK: {
+	[r.MALE_FIRST_NAME_K]: {
 		items: [ 'Karl' ],
 	},
-	maleFirstNameL: {
+	[r.MALE_FIRST_NAME_L]: {
 		items: [ 'Louis', 'Lowell' ],
 	},
-	maleFirstNameM: {
+	[r.MALE_FIRST_NAME_M]: {
 		items: [ 'Mickey', 'Mitchell' ],
 	},
-	maleFirstNameO: {
+	[r.MALE_FIRST_NAME_O]: {
 		items: [ 'Ollie', 'Oscar' ],
 	},
-	maleFirstNameP: {
+	[r.MALE_FIRST_NAME_P]: {
 		items: [ 'Pee Wee' ],
 	},
-	maleFirstNameR: {
+	[r.MALE_FIRST_NAME_R]: {
 		items: [ 'Ray', 'Red', 'Robin', 'Roger', 'Rusty' ],
 	},
-	maleFirstNameS: {
+	[r.MALE_FIRST_NAME_S]: {
 		items: [ 'Sammy', 'Scotty', 'Seymour', 'Smokey', 'Sonny', 'Stuff' ],
 	},
-	maleFirstNameT: {
+	[r.MALE_FIRST_NAME_T]: {
 		items: [ 'Tab', 'Ted', 'Thomas', 'Tiny' ],
 	},
-	maleFirstNameV: {
+	[r.MALE_FIRST_NAME_V]: {
 		items: [ 'Vaughn' ],
 	},
-	maleFirstNameW: {
+	[r.MALE_FIRST_NAME_W]: {
 		items: [ 'Walter', 'Wayne', 'Wendell', 'Wilbert', 'Willie', 'Wilson' ],
 	},
-	middleInitialOrNickname: {
+	[r.MIDDLE_INITIAL_OR_NICKNAME]: {
 		items: [
-			'A. ', 'B. ', 'C. ', 'D. ', 'E. ', 'F. ', 'G. ', 'H. ', 'I. ', 'J. ', 'K. ',
-			'L. ', 'M. ', 'N. ', 'O. ', 'P. ', 'Q. ', 'R. ', 'S. ', 'T. ', 'U. ', 'V. ',
-			'W. ', 'X. ', 'Y. ', 'Z. ', '"Finkelschnitz" ', '"Red" ', '"Scat" ',
-			'"Stomp" ',
+			' ',
 		],
-		chance: 27,
+		rare: {
+			25: {
+				items: [
+					' A. ', ' B. ', ' C. ', ' D. ', ' E. ', ' F. ', ' G. ',
+					' H. ',	' I. ', ' J. ', ' K. ',	' L. ', ' M. ', ' N. ',
+					' O. ', ' P. ',	' Q. ', ' R. ', ' S. ', ' T. ', ' U. ',
+					' V. ',	' W. ', ' X. ',	' Y. ', ' Z. ',
+					' "Finkelschnitz" ', ' "Red" ', ' "Scat" ',	' "Stomp" ',
+				],
+			},
+		},
 	},
-	lastName: {
+	[r.LAST_NAME]: {
 		items: [
-			[ 'lastNameA' ],
-			[ 'lastNameB' ],
-			[ 'lastNameC' ],
-			[ 'lastNameD' ],
-			[ 'lastNameF' ],
-			[ 'lastNameG' ],
-			[ 'lastNameH' ],
-			[ 'lastNameJ' ],
-			[ 'lastNameL' ],
-			[ 'lastNameM' ],
-			[ 'lastNameP' ],
-			[ 'lastNameR' ],
-			[ 'lastNameS' ],
-			[ 'lastNameT' ],
-			[ 'lastNameW' ],
+			[ r.LAST_NAME_A ], [ r.LAST_NAME_B ], [ r.LAST_NAME_C ],
+			[ r.LAST_NAME_D ], [ r.LAST_NAME_F ], [ r.LAST_NAME_G ],
+			[ r.LAST_NAME_H ], [ r.LAST_NAME_J ], [ r.LAST_NAME_K ],
+			[ r.LAST_NAME_L ], [ r.LAST_NAME_M ], [ r.LAST_NAME_P ],
+			[ r.LAST_NAME_R ], [ r.LAST_NAME_S ], [ r.LAST_NAME_T ],
+			[ r.LAST_NAME_W ],
 		],
 	},
-	lastNameA: {
+	[r.LAST_NAME_A]: {
 		items: [
 			'Adair', 'Adams', 'Allen', 'Ayres',
 		],
 	},
-	lastNameB: {
+	[r.LAST_NAME_B]: {
 		items: [
 			'Balmer', 'Baranco', 'Baur', 'Bechet', 'Brown', 'Bostic', 'Burke',
 		],
 	},
-	lastNameC: {
+	[r.LAST_NAME_C]: {
 		items: [
 			'Carlson', 'Cletro', 'Crayton', 'Crosby', 'Costa',
 		],
 	},
-	lastNameD: {
+	[r.LAST_NAME_D]: {
 		items: [
 			'Dixon',
 		],
 	},
-	lastNameF: {
+	[r.LAST_NAME_F]: {
 		items: [
 			'Fox', 'Fuller',
 		],
 	},
-	lastNameG: {
+	[r.LAST_NAME_G]: {
 		items: [
 			'Gershwin', 'Gray',
 		],
 	},
-	lastNameH: {
+	[r.LAST_NAME_H]: {
 		items: [
 			'Hall', 'Heier',
 		],
 	},
-	lastNameJ: {
+	[r.LAST_NAME_J]: {
 		items: [
 			'Jackson', 'Jenkins', 'Johnson', 'Jordan',
 		],
 	},
-	lastNameK: {
+	[r.LAST_NAME_K]: {
 		items: [
 			'Kahn', 'Kaufman', 'Kaye', 'Kent', 'King', 'Kreisler', 'Kryger',
 		],
 	},
-	lastNameL: {
+	[r.LAST_NAME_L]: {
 		items: [
 			'Lane', 'Lewis',
 		],
 	},
-	lastNameM: {
+	[r.LAST_NAME_M]: {
 		items: [
 			'Maddox', 'McCoy', 'McDonald', 'McGee', 'McKinley', 'McPartland',
 			'Melton', 'Miller', 'Monroe', 'Mooney',
 		],
 	},
-	lastNameP: {
+	[r.LAST_NAME_P]: {
 		items: [
 			'Powers', 'Pryor',
 		],
 	},
-	lastNameR: {
+	[r.LAST_NAME_R]: {
 		items: [
 			'Russels',
 		],
 	},
-	lastNameS: {
+	[r.LAST_NAME_S]: {
 		items: [
 			'Schneider', 'Simms', 'Short', 'Smith', 'Snow', 'Sparrow', 'Swift',
 		],
 	},
-	lastNameT: {
+	[r.LAST_NAME_T]: {
 		items: [
 			'Tharpe',
 		],
 	},
-	lastNameW: {
+	[r.LAST_NAME_W]: {
 		items: [
 			'Williams', 'Worth',
 		],
 	},
-	honorific: {
-		items: [
-			' "The King of the Polkas"',
-			[ ' "The ', 'honorificAdjective', ' ', 'honorificNoun', '"' ],
-		],
-		chance: 30,
+	[r.HONORIFIC]: {
+		items: [],
+		rare:  {
+			25: {
+				items: [
+					[ ' "The ', r.HONORIFIC_ADJECTIVE, r.HONORIFIC_NOUN, '"' ],
+				],
+			},
+			100: {
+				items: [
+					' "The King of the Polkas"',
+				],
+			},
+		},
 	},
-	honorificAdjective: {
+	[r.HONORIFIC_ADJECTIVE]: {
 		items: [
-			'Crooning', 'Singing', 'Southern', 'Whispering',
+			'Crooning ', 'Singing ', 'Southern ', 'Whispering ',
 		],
 	},
-	honorificNoun: {
+	[r.HONORIFIC_NOUN]: {
 		items: [
 			'Cornetist', 'Drummer', 'Gentleman', 'Ranger', 'Troubador',
 		],

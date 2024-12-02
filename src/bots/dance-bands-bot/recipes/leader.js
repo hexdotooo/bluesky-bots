@@ -1,68 +1,45 @@
+import r from './recipeNames.js'
+
 export const leader = {
-	leaderPossessiveOrThe: {
+	[r.LEADER_POSSESSIVE_OR_THE]: {
 		items: [
-			[ 'leaderSingularPossessive' ],
-			[ 'leaders', ' and their ' ],
+			[ r.LEADER_SINGULAR_POSSESSIVE ],
+			[ r.LEADERS, ' and their ' ],
 			[ 'The ' ],
 		],
 	},
-	leaderSingularPossessive: {
+	[r.LEADER_SINGULAR_POSSESSIVE]: {
 		items: [
-			[ 'femaleLeaderAndHer' ],
-			[ 'maleLeaderAndHis' ],
-			[ 'lastName', '\'s ' ],
-			[ 'leaderName', 'singularPossessiveUngendered' ],
+			[ r.FEMALE_NAME, ' and her ' ],
+			[ r.MALE_NAME, ' and his ' ],
+			[ r.LAST_NAME, "'s " ],
+			[ r.LEADER_NAME, r.SINGULAR_POSSESSIVE_UNGENDERED ],
 		],
 	},
-	leaderName: {
+	[r.LEADER_NAME]: {
 		items: [
-			[ 'maleName' ],
-			[ 'femaleName' ],
+			[ r.MALE_NAME ],
+			[ r.FEMALE_NAME ],
 		],
 	},
-	singularPossessiveFemale: {
+	[r.SINGULAR_POSSESSIVE_UNGENDERED]: {
 		items: [
-			[ ' and her ' ],
-		],
-	},
-	singularPossessiveMale: {
-		items: [
-			[ ' and his ' ],
-		],
-	},
-	pluralPossessive: {
-		items: [
-			[ ' and their ' ],
-		],
-	},
-	singularPossessiveUngendered: {
-		items: [
-			[ '\'s ' ],
+			[ "'s " ],
 			[ ' and the ' ],
 			[ ' with the ' ],
 		],
 	},
-	femaleLeaderAndHer: {
+	[r.LEADERS]: {
 		items: [
-			[ 'femaleName', 'singularPossessiveFemale' ],
-		],
-	},
-	maleLeaderAndHis: {
-		items: [
-			[ 'maleName', 'singularPossessiveMale' ],
-		],
-	},
-	leaders: {
-		items: [
-			[ 'maleName', ' and ', 'maleName' ],
-			[ 'maleFirstName', ' and ', 'maleName' ],
-			[ 'femaleFirstName', ' and ', 'femaleName' ],
-			[ 'lastName', ' and ', 'lastName' ],
-			[ 'The ', 'lastName', ' ', 'siblings' ],
+			[ r.MALE_NAME, ' and ', r.MALE_NAME ],
+			[ r.MALE_FIRST_NAME, ' and ', r.MALE_NAME ],
+			[ r.FEMALE_FIRST_NAME, ' and ', r.FEMALE_NAME ],
+			[ r.LAST_NAME, ' and ', r.LAST_NAME ],
+			[ 'The ', r.LAST_NAME, r.SIBLINGS ],
 			[ 'The King\'s Jesters' ],
 		],
 	},
-	siblings: {
-		items: [ 'Brothers', 'Sisters' ],
+	[r.SIBLINGS]: {
+		items: [ ' Brothers', ' Sisters' ],
 	},
 }

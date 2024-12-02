@@ -1,11 +1,10 @@
 import { oneIn, randomItem } from '../../common/utils.js'
 
 import { recipes } from './recipes/index.js'
+import r from './recipes/recipeNames.js'
 
 export default function generateBand () {
-	const out = makeRecipe('bandName')
-
-	// TODO: Eliminate whatever lead to this
+	const out = makeRecipe(r.BAND_NAME)
 
 	const boring = /^(?:\w+ ){1,2}\w+$/
 
@@ -23,26 +22,16 @@ function makeRecipe (name) {
 		? element.reduce(recipeReducer, '')
 		: element
 
-	const recipe = recipes[name]
+	let { rare, items } = recipes[name]
 
-	// TODO: Change hardcoded "rare" and "extra rare" items into an array:
-	// rareItems: [ { chance: 75, items: [] }, { chance: 50, items: [] } ]
-	// Process in decreasing order of rarity until one is hit (or none are)
+	if (rare)
+		for (const chance in Object.keys(rare).sort((a, b) => b - a))
+			if (oneIn(chance)) {
+				items = rare[chance].items
+				break
+			}
 
-	const rareType = recipe.extraRare
-		? 'extraRare'
-		: recipe.rare
-			? 'rare'
-			: undefined
-
-	let selectedItem
-
-	if (rareType && oneIn(recipe[rareType].chance))
-		selectedItem = randomItem(recipe[rareType].items)
-	else if (recipe.chance)
-		selectedItem = oneIn(recipe.chance) ? randomItem(recipe.items) : ''
-	else
-		selectedItem = randomItem(recipe.items)
-
-	return processItem(selectedItem)
+	return items.length
+		? processItem(randomItem(items))
+		: ''
 }

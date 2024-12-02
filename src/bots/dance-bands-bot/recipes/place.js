@@ -1,8 +1,10 @@
+import r from './recipeNames.js'
+
 export const place = {
-	place: {
-		items: [ [ 'generalPlace' ], [ 'prefixPlace' ] ],
+	[r.PLACE]: {
+		items: [ [ r.GENERAL_PLACE ], [ r.PREFIX_PLACE ] ],
 	},
-	generalPlace: {
+	[r.GENERAL_PLACE]: {
 		items: [
 			'Beaver Valley', 'Buffalo', 'Casa Loma', 'Colorado', 'Cumberland',
 			'Georgia', 'Goosetown', 'Goosetown', 'Hollywood', 'Kansas City',
@@ -11,7 +13,7 @@ export const place = {
 			'Quaker City', 'Santa Fe', 'Smoky Mountain', 'Tennessee', 'Texas',
 		],
 	},
-	prefixPlace: {
+	[r.PREFIX_PLACE]: {
 		items: [
 			'Campus', 'City', 'Club Maurice', 'Farm', 'Friars Inn',
 			'Grand Canyon', 'Hotel Astor', 'Nankin', 'Pecos River', 'Prairie',

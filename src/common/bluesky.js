@@ -5,18 +5,7 @@ import { logPost, errorQuit } from './utils.js'
 
 const sessions = {}
 
-async function login ({ agent, bot }) {
-	const password = env[`password_${bot}`]
-
-	if (!password) errorQuit(`Can't log in! password_${bot} not set in .env`)
-
-	await agent.login({
-		identifier: `${bot}.bsky.social`,
-		password,
-	})
-}
-
-export async function post ({ botName, text }) {
+export async function post ({ botName, interval, text }) {
 	const agent = new BskyAgent({
 		service:        'https://bsky.social',
 		persistSession: (_, sessionData) => {
@@ -26,7 +15,14 @@ export async function post ({ botName, text }) {
 
 	if (!sessions[botName])
 		try {
-			login({ agent, botName })
+			const password = env[`password_${botName}`]
+
+			if (!password) errorQuit(`Can't log in! password_${botName} not set in .env`)
+
+			await agent.login({
+				identifier: `${botName}.bsky.social`,
+				password,
+			})
 		} catch (error) {
 			errorQuit(`Couldn't log in as ${botName}! Error was: ${error.message}`)
 		}
@@ -43,5 +39,5 @@ export async function post ({ botName, text }) {
 		errorQuit(`Couldn't post to ${botName}! Error was: ${error.message}`)
 	}
 
-	logPost({ botName, text })
+	logPost({ botName, interval, text })
 }

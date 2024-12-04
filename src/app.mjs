@@ -115,6 +115,7 @@ function doPost (botName) {
 	else
 		post({
 			botName,
+			interval,
 			text,
 		})
 

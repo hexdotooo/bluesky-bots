@@ -19,8 +19,12 @@ export const band = {
 		],
 	},
 	[r.INSTRUMENT_OPTIONAL]: {
-		items:  [ 'Jug ', 'Marimba ', 'Saxophone ', 'Tympany ' ],
-		chance: 20,
+		items: [],
+		rare:  {
+			20: {
+				items: [ 'Jug ', 'Marimba ', 'Saxophone ', 'Tympany ' ],
+			},
+		},
 	},
 	[r.BAND_NUMERIC]: {
 		items: [

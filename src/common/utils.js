@@ -1,22 +1,19 @@
+import { dirname, resolve             } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+
 import chalk from 'chalk'
 
 import { timestamp } from './time.js'
 
-function random (max) {
-	return Math.floor(Math.random() * Math.floor(max))
-}
+export const random = max => Math.floor(Math.random() * Math.floor(max))
 
-export function randomItem (items) {
-	return items[random(items.length)]
-}
+export const randomItem = items => items[random(items.length)]
 
-export function oneIn (chance) {
-	return random(chance) === 1
-}
-
-const padBotName = botName => botName.padEnd(15, ' ')
+export const oneIn = chance => random(chance) === 1
 
 export function logPost ({ botName, interval, demoMode, text }) {
+	const padBotName = botName => botName.padEnd(15, ' ')
+
 	let logEntry = demoMode
 		? chalk.red('[Demo: ')
 		: chalk.hex('#FFCC33')('[')
@@ -29,6 +26,26 @@ export function logPost ({ botName, interval, demoMode, text }) {
 	logEntry += text
 
 	console.info(logEntry)
+}
+
+export async function dynamicImport (path) {
+	const importPath = pathToFileURL(
+		resolve(
+			dirname(
+				fileURLToPath(import.meta.url)
+			), path
+		)
+	).href
+
+	let imported
+
+	try {
+		imported = await import(importPath)
+	} catch (error) {
+		errorQuit(`Couldn't import ${path}: ${error}`)
+	}
+
+	return imported
 }
 
 export function errorQuit (message) {

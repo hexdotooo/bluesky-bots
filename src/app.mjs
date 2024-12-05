@@ -1,3 +1,4 @@
+import dotenvx from '@dotenvx/dotenvx'
 import minimist from 'minimist-lite'
 
 import danceBandsBot from './bots/dance-bands-bot/index.js'
@@ -8,6 +9,8 @@ import { post                             } from './common/bluesky.js'
 import { errorQuit, logPost               } from './common/utils.js'
 import { getMinutesUntilPostingTime       } from './common/state.js'
 import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
+
+dotenvx.config({ path: '.env.live' })
 
 // TODO: Build this from a config file
 // TODO: Posting minute

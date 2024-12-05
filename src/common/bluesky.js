@@ -1,5 +1,4 @@
 import { BskyAgent } from '@atproto/api'
-import { env       } from 'node:process'
 
 import { logPost, errorQuit } from './utils.js'
 
@@ -15,7 +14,7 @@ export async function post ({ botName, interval, text }) {
 
 	if (!sessions[botName])
 		try {
-			const password = env[`password_${botName}`]
+			const password = process.env[`PASSWORD_${botName.toUpperCase()}`]
 
 			if (!password) errorQuit(`Can't log in! password_${botName} not set in .env`)
 

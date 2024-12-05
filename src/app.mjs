@@ -6,7 +6,7 @@ import everyTmnt     from './bots/every-tmnt/index.js'
 import howlBot       from './bots/howl-bot/index.js'
 
 import { post                             } from './common/bluesky.js'
-import { errorQuit, logPost               } from './common/utils.js'
+import { errorQuit                        } from './common/utils.js'
 import { getMinutesUntilPostingTime       } from './common/state.js'
 import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 
@@ -108,19 +108,12 @@ function doPost (botName) {
 	const { generator, interval = 1 } = bots[botName]
 	const text = generator({ demoMode })
 
-	if (demoMode)
-		logPost({
-			botName,
-			interval,
-			demoMode,
-			text,
-		})
-	else
-		post({
-			botName,
-			interval,
-			text,
-		})
+	post({
+		botName,
+		demoMode,
+		interval,
+		text,
+	})
 
 	botRuns[botName]++
 }

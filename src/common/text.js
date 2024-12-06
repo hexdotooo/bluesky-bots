@@ -21,7 +21,7 @@ export function recite ({ botName, demoMode, items }) {
 	const state = getBotState(botName)
 	let currentItem = state.item[mode]
 
-	const text = items[currentItem]
+	const text = items[currentItem].replace('<br>', '\n')
 
 	currentItem++
 

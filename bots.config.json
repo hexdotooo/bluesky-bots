@@ -1,0 +1,12 @@
+{
+	"envPath": ".env.live",
+	"bots": {
+		"dance-bands-bot": {
+		},
+		"every-tmnt": {
+		},
+		"howl-bot": {
+			"interval":  3
+		}
+	}
+}

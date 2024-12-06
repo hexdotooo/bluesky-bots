@@ -5,6 +5,28 @@ import chalk from 'chalk'
 
 import { timestamp } from './time.js'
 
+// Suppress warnings about JSON module imports being experimental - requires
+// app to be run with node --no-warnings
+process.on('warning', warning => {
+	if (warning.name !== 'ExperimentalWarning') console.warn(warning)
+})
+
+// Path is relative to bluesky-bots root
+export async function dynamicImport (path) {
+	const importPath = pathToFileURL(resolve(path)).href
+
+	const moduleIsJson = /\.json$/.test(path)
+
+	// Import attributes are currently at TC39 stage 3 and ESLint only
+	// adds syntax support at stage 4. Seems like there's no way to stop
+	// it complaining here short of transpiling. I can live with it
+	const imported = await import(
+		importPath,	moduleIsJson ? { with: { type: 'json' } } : {}
+	)
+
+	return moduleIsJson ? imported.default : imported
+}
+
 export const random = max => Math.floor(Math.random() * Math.floor(max))
 
 export const randomItem = items => items[random(items.length)]
@@ -26,26 +48,6 @@ export function logPost ({ botName, interval, demoMode, text }) {
 	logEntry += text
 
 	console.info(logEntry)
-}
-
-export async function dynamicImport (path) {
-	const importPath = pathToFileURL(
-		resolve(
-			dirname(
-				fileURLToPath(import.meta.url)
-			), path
-		)
-	).href
-
-	let imported
-
-	try {
-		imported = await import(importPath)
-	} catch (error) {
-		errorQuit(`Couldn't import ${path}: ${error}`)
-	}
-
-	return imported
 }
 
 export function errorQuit (message) {

@@ -37,9 +37,8 @@ export function recite ({ botName, demoMode, items }) {
 let recipeData
 
 export async function loadRecipes (botName) {
-	const path = `../bots/${botName}/data/recipes.js`
-
-	const { default: { recipeNames, recipes } } = await dynamicImport(path)
+	const { default: { recipeNames, recipes } } =
+		await dynamicImport(`./src/bots/${botName}/data/recipes.js`)
 
 	recipeData = recipes
 

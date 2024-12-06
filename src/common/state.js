@@ -6,12 +6,14 @@ import { errorQuit }        from './utils.js'
 
 const getBotStatePath = botName => `./src/bots/${botName}/state.json`
 
+// Bot state contains the minute of the hour it posts on and, for recital
+// bots, the current line number of the text it's reciting in both live mode
+// and demo mode
 export function getBotState (botName) {
-	const minute = getCurrentMinute()
-
 	let state = {
-		minute,
-		item: {
+		// If not set in state, use current minute number for when to post
+		minute: getCurrentMinute(),
+		item:   {
 			demo: 0,
 			live: 0,
 		},

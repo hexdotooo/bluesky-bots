@@ -4,8 +4,8 @@
 	"description": "My bots on Bluesky",
 	"type": "module",
 	"scripts": {
-		"demo": "node ./src/app.mjs --demo",
-		"live": "node ./src/app.mjs"
+		"demo": "node --no-warnings ./src/app.mjs --demo",
+		"live": "node --no-warnings ./src/app.mjs"
 	},
 	"author": "Hex (https://hex.ooo/)",
 	"license": "None",

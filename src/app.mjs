@@ -1,34 +1,24 @@
-import dotenvx from '@dotenvx/dotenvx'
+import dotenvx  from '@dotenvx/dotenvx'
 import minimist from 'minimist-lite'
 
-import danceBandsBot from './bots/dance-bands-bot/index.js'
-import everyTmnt     from './bots/every-tmnt/index.js'
-import howlBot       from './bots/howl-bot/index.js'
-
 import { post                             } from './common/bluesky.js'
-import { errorQuit                        } from './common/utils.js'
+import { dynamicImport, errorQuit         } from './common/utils.js'
 import { getMinutesUntilPostingTime       } from './common/state.js'
 import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 
-dotenvx.config({ path: '.env.live' })
+const config = await dynamicImport('./bots.config.json')
 
-// TODO: Build this from a config file
-// TODO: Posting minute
-const bots = {
-	'dance-bands-bot': {
-		generator: danceBandsBot,
-	},
-	'every-tmnt': {
-		generator: everyTmnt,
-	},
-	'howl-bot': {
-		generator: howlBot,
-		stateful:  true,
-		interval:  3,
-	},
-}
+dotenvx.config({ path: config.envPath })
 
-let botNames = Object.keys(bots)
+// TODO: Config: posting minute
+
+for (const botName of Object.keys(config.bots))
+	try {
+		config.bots[botName].generate =
+			(await dynamicImport(`./src/bots/${botName}/index.js`)).default
+	} catch (error) {
+		errorQuit(error)
+	}
 
 const options = minimist(process.argv.slice(2), {
 	alias: {
@@ -39,17 +29,19 @@ const options = minimist(process.argv.slice(2), {
 
 // TODO: --help
 const {
-	bot: singleBotName,
-	demo: demoMode,
-	once: runOnce,
+	demo: demoMode,      // Output to console only
+	bot:  singleBotName, // Only demo a specific bot
+	once: runOnce,       // Alias for --count 1
 } = options
 
 let {
-	count: runCount,
+	count: runCount,     // How many times to run in demo mode
 } = options
 
 // Option error checking. Typeof checks are because minimist-lite will combine
 // values given to both forms of an aliased option into an array
+
+let botNames = Object.keys(config.bots)
 
 if (singleBotName) {
 	if (!demoMode)
@@ -71,13 +63,16 @@ if (runCount) {
 
 if (runOnce) runCount = 1
 
+// TODO: State storage location outside of src/bots/bot-name
 const botRuns = {}
 
+// Run the bots - if a minute of the hour at when to post is in bot state,
+// wait for it to come around - except in demo mode
 for (const botName of botNames) {
 	let firstPostDelay = ONE_MINUTE * getMinutesUntilPostingTime(botName)
 	let postingInterval = ONE_HOUR
 
-	const { interval: intervalHours } = bots[botName]
+	const { interval: intervalHours } = config.bots[botName]
 
 	if (intervalHours) {
 		if (intervalHours % 1 !== 0)
@@ -94,6 +89,7 @@ for (const botName of botNames) {
 	setTimeout(startRun, firstPostDelay, botName, postingInterval)
 }
 
+// Post for the first time, then schedule subsequent posts
 function startRun (botName, postingInterval) {
 	botRuns[botName] = 0
 
@@ -105,8 +101,8 @@ function doPost (botName) {
 	if (runCount && botRuns[botName] === runCount)
 		process.exit(0)
 
-	const { generator, interval = 1 } = bots[botName]
-	const text = generator({ demoMode })
+	const { generate, interval = 1 } = config.bots[botName]
+	const text = generate({ demoMode })
 
 	post({
 		botName,

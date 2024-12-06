@@ -8,7 +8,11 @@ import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 
 const config = await dynamicImport('./bots.config.json')
 
-dotenvx.config({ path: config.envPath })
+try {
+	dotenvx.config({ path: config.envPath, strict: true })
+} catch (error) {
+	errorQuit(`Can't run: ${error.message}`)
+}
 
 // TODO: Config: posting minute
 

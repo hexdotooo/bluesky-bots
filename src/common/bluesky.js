@@ -5,6 +5,11 @@ import { logPost, errorQuit } from './utils.js'
 const sessions = {}
 
 export async function post ({ botName, demoMode, interval, text }) {
+	if (demoMode) {
+		logPost({ botName, demoMode, interval, text })
+		return
+	}
+
 	const agent = new BskyAgent({
 		service:        'https://bsky.social',
 		persistSession: (_, sessionData) => {
@@ -32,12 +37,11 @@ export async function post ({ botName, demoMode, interval, text }) {
 			errorQuit(`Couldn't resume session for ${botName}! Error was: ${error.message}`)
 		}
 
-	if (!demoMode)
-		try {
-			await agent.post({ text })
-		} catch (error) {
-			errorQuit(`Couldn't post to ${botName}! Error was: ${error.message}`)
-		}
+	try {
+		await agent.post({ text })
+	} catch (error) {
+		errorQuit(`Couldn't post to ${botName}! Error was: ${error.message}`)
+	}
 
 	logPost({ botName, demoMode, interval, text })
 }

@@ -5,7 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"demo": "node --no-warnings ./src/app.mjs --demo",
-		"live": "node --no-warnings ./src/app.mjs"
+		"live": "node --no-warnings ./src/app.mjs",
+		"test": "pnpm exec vitest",
+		"coverage": "pnpm exec vitest run --coverage"
 	},
 	"author": "Hex (https://hex.ooo/)",
 	"license": "None",
@@ -21,7 +23,9 @@
 		"temporal-polyfill": "^0.2.5"
 	},
 	"devDependencies": {
+		"@vitest/coverage-v8": "2.1.8",
 		"eslint": "^9.15.0",
-		"neostandard": "^0.11.9"
+		"neostandard": "^0.11.9",
+		"vitest": "^2.1.8"
 	}
 }

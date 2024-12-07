@@ -1,3 +1,4 @@
+import { exit                         } from 'node:process'
 import { dirname, resolve             } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -52,5 +53,5 @@ export function logPost ({ botName, interval, demoMode, text }) {
 
 export function errorQuit (message) {
 	console.error(`${chalk.red('[Error]')} ${message}`)
-	process.exit(0)
+	exit(1)
 }

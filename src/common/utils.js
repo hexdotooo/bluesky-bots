@@ -1,5 +1,5 @@
-import { exit                         } from 'node:process'
-import { dirname, resolve             } from 'node:path'
+import { exit,                        } from 'node:process'
+import { resolve                      } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import chalk from 'chalk'
@@ -9,7 +9,7 @@ import { timestamp } from './time.js'
 // Suppress warnings about JSON module imports being experimental - requires
 // app to be run with node --no-warnings
 process.on('warning', warning => {
-	if (warning.name !== 'ExperimentalWarning') console.warn(warning)
+	warning.name !== 'ExperimentalWarning' && console.warn(warning)
 })
 
 // Path is relative to bluesky-bots root
@@ -34,9 +34,9 @@ export const randomItem = items => items[random(items.length)]
 
 export const oneIn = chance => random(chance) === 1
 
-export function logPost ({ botName, interval, demoMode, text }) {
-	const padBotName = botName => botName.padEnd(15, ' ')
+export const padBotName = botName => botName.padEnd(15, ' ')
 
+export function logPost ({ botName, interval, demoMode, text }) {
 	let logEntry = demoMode
 		? chalk.red('[Demo: ')
 		: chalk.hex('#FFCC33')('[')

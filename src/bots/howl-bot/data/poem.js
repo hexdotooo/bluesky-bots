@@ -120,5 +120,5 @@ export const items = [
 	'I’m with you in Rockland<br> where we wake up electrified out of the coma by our own souls’ airplanes roaring over the roof they’ve come to drop angelic bombs the hospital illuminates itself imaginary walls collapse',
 	'O skinny legions run outside O starry spangled shock of mercy the eternal war is here O victory forget your underwear we’re free',
 	'I’m with you in Rockland<br> in my dreams you walk dripping from a sea-journey on the highway across America in tears to the door of my cottage in the Western night',
-	'San Francisco, 1955-56'
+	'San Francisco, 1955-56',
 ]

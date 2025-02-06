@@ -4,13 +4,28 @@ import { oneIn      } from '../../common/utils.js'
 import { adjectives } from './data/adjectives.js'
 import { nouns }      from './data/nouns.js'
 
+// TODO: 1-syl adj 1-syl nouns
+// TODO: Plural forms: -an:-en, -h:es, -y:-ies, etc
 export default function generate () {
 	const word = list => randomWord(list, { capitalize: true })
 
-	let out = `${word(adjectives)} ${word(adjectives)} ${word(adjectives)} ${word(nouns)}s`
+	let object = word(nouns)
 
-	if (oneIn(10))
-		out += `, ${word(nouns).toLowerCase()}s in a ${word(nouns).toLowerCase()}, ${word(nouns).toLowerCase()} power!`
+	const pluralAddsSyllable = /(?:ce|s|se)$/
+	const startsWithVowel    = /^[aeiou]/
+
+	while (object)
+		if (pluralAddsSyllable.test(object))
+			object = word(nouns)
+		else
+			break
+
+	let out = `${word(adjectives)} ${word(adjectives)} ${word(adjectives)} ${object}s`
+
+	if (oneIn(10)) {
+		const specialObject = word(nouns).toLowerCase()
+		out += `, ${word(nouns).toLowerCase()}s in ${startsWithVowel.test(specialObject) ? 'an' : 'a'} ${specialObject}, ${word(nouns).toLowerCase()} power!`
+	}
 
 	return out
 }

@@ -20,6 +20,7 @@
 		"chalk": "^5.3.0",
 		"minimist-lite": "^2.2.1",
 		"natsort": "^2.0.3",
+		"plur": "^5.1.0",
 		"temporal-polyfill": "^0.2.5"
 	},
 	"devDependencies": {

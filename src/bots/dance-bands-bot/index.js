@@ -1,9 +1,9 @@
 import { loadRecipes, makeRecipe } from '../../common/text.js'
 
-const recipeNames = await loadRecipes('dance-bands-bot')
+const { recipes, recipeNames } = await loadRecipes('dance-bands-bot')
 
 export default function generate () {
-	const out = makeRecipe(recipeNames.BAND_NAME)
+	const out = makeRecipe({ recipes, recipeName: recipeNames.BAND_NAME })
 
 	const boring = /^(?:[\w']+ ){1,2}\w+$/
 

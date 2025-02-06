@@ -19,7 +19,7 @@ try {
 for (const botName of Object.keys(config.bots))
 	try {
 		config.bots[botName].generate =
-			(await dynamicImport(`./src/bots/${botName}/index.js`)).default
+			await dynamicImport(`./src/bots/${botName}/index.js`)
 	} catch (error) {
 		errorQuit(error)
 	}

@@ -25,7 +25,7 @@ export async function dynamicImport (path) {
 		importPath,	moduleIsJson ? { with: { type: 'json' } } : {}
 	)
 
-	return moduleIsJson ? imported.default : imported
+	return imported.default
 }
 
 export const random = max => Math.floor(Math.random() * Math.floor(max))

@@ -7,7 +7,7 @@ import { dynamicImport, oneIn, randomItem } from './utils.js'
 export function randomWord (list, options) {
 	const word = randomItem(list)
 
-	if (options.capitalize)
+	if (options?.capitalize)
 		return word[0].toUpperCase() + word.slice(1)
 	else
 		return word
@@ -26,7 +26,6 @@ export function recite ({ botName, demoMode, items }) {
 	currentItem++
 
 	if (currentItem === items.length) currentItem = 0
-
 	state.item[mode] = currentItem
 
 	setBotState({ state, botName })
@@ -34,29 +33,21 @@ export function recite ({ botName, demoMode, items }) {
 	return text
 }
 
-let recipeData
-
-export async function loadRecipes (botName) {
-	const { default: { recipeNames, recipes } } =
-		await dynamicImport(`./src/bots/${botName}/data/recipes.js`)
-
-	recipeData = recipes
-
-	return recipeNames
-}
+export const loadRecipes =
+	async botName => await dynamicImport(`./src/bots/${botName}/data/recipes.js`)
 
 // Process a recipe (grammar) for generating text, which may include other
 // recipes within it
-export function makeRecipe (name) {
-	const recipeReducer = (itemsOut, element) => recipeData[element]
-		? itemsOut + makeRecipe(element)
+export function makeRecipe ({ recipes, recipeName }) {
+	const recipeReducer = (itemsOut, element) => recipes[element]
+		? itemsOut + makeRecipe({ recipes, recipeName: element })
 		: itemsOut + element
 
 	const processItem = element => Array.isArray(element)
 		? element.reduce(recipeReducer, '')
 		: element
 
-	let { rare, items } = recipeData[name]
+	let { rare, items } = recipes[recipeName]
 
 	// Try for rare items, in increasing order of likeliness
 	if (rare)

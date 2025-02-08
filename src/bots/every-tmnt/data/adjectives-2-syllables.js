@@ -1,4 +1,4 @@
-export const adjectives = [
+export const a2 = [
 	'1-star',
 	'2-star',
 	'3-star',
@@ -606,7 +606,6 @@ export const adjectives = [
 	'Cubist',
 	'cuckoo',
 	'cuddly',
-	'cultural',
 	'culty',
 	'cumbent',
 	'cumbrous',
@@ -624,7 +623,6 @@ export const adjectives = [
 	'current',
 	'currish',
 	'cursive',
-	'cursory',
 	'curtal',
 	'curule',
 	'curvy',

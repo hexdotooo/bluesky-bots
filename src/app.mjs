@@ -8,6 +8,7 @@ import { ONE_SECOND, ONE_MINUTE, ONE_HOUR } from './common/time.js'
 
 const config = await dynamicImport('./bots.config.json')
 
+// TODO: Test whether DOTENV_PRIVATE_KEY LIVE is set, if not, demo mode
 try {
 	dotenvx.config({ path: config.envPath, strict: true })
 } catch (error) {

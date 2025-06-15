@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# systemd-send-mail by Nick Chevsky
+# https://github.com/nchevsky/systemd-send-mail
+# Released under the BSD 2-Clause License, see LICENSES.md
+
+####################################################################################################
+# User-serviceable definitions
+####################################################################################################
+
+RECIPIENT=
+SENDER=
+
+####################################################################################################
+# Internal definitions
+####################################################################################################
+
+HOST="$2"
+UNIT="$1"
+USER="$3"
+
+domain="$(hostname --fqdn)"
+recipient="${RECIPIENT:-root@$domain}"
+sender="${SENDER:-$USER@$domain}"
+status="$(systemctl status "$UNIT")"
+
+echo "From: <$sender>\nTo: <$recipient>\nSubject: [$HOST] $UNIT\n\n$status" | sendmail -t

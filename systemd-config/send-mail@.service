@@ -1,0 +1,11 @@
+# systemd-send-mail by Nick Chevsky
+# https://github.com/nchevsky/systemd-send-mail
+# Released under the BSD 2-Clause License, see LICENSES.md
+
+[Unit]
+Description=Send e-mail notifications
+Wants=network.target
+
+[Service]
+ExecStart=/etc/systemd/system/send-mail %i %H %u
+Type=oneshot

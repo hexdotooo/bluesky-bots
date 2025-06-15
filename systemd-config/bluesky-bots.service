@@ -1,0 +1,11 @@
+[Unit]
+Description=Bluesky bots Node application
+OnFailure=send-mail@%N.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c '/bin/bash /home/yourname/.config/systemd/user/bluesky-bots.sh'
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
